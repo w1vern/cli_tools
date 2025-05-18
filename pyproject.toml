@@ -1,0 +1,17 @@
+[project]
+name = "cli_tools"
+version = "0.1.0"
+description = "Set of useful custom cli tools"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "pathspec>=0.11.2",
+]
+
+[project.scripts]
+env-generator = "env_generator.main:main"
+one-file-generator = "one_file_generator.main:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
