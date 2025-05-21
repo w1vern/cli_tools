@@ -1,5 +1,4 @@
 
-import argparse
 from utils import get_repo_files, cli_input
 
 
@@ -10,14 +9,14 @@ def generate_env_file(root_dir: str = ".", output_file: str = ".env") -> None:
     def parse_env_line(line: str) -> tuple[str, str]:
         if "=" not in line or line.strip().startswith("#"):
             return "", ""
-        key, value = line.strip().split("=", 1)
+        key, value = line.replace(" ", "").replace("\t", "").split("=", 1)
         return key.strip(), value.strip()
 
     for file in files:
-        with open(file, "r", encoding="utf-8") as f:
+        with open(root_dir / file, "r", encoding="utf-8") as f:
             for line in f:
                 key, value = parse_env_line(line)
-                if key in env_dict:
+                if key in env_dict and value not in env_dict[key].split("|"):
                     env_dict[key] += f"|{value}"
                 else:
                     env_dict[key] = value

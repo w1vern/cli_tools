@@ -1,67 +1,41 @@
-# Merge .env.example Generator
+# CLI Tools
 
-This script recursively merges all `.env.example` files found in a given directory (and its subdirectories) into a single `.env` file. It includes the following features:
+A collection of handy CLI tools for everyday development tasks. Install and use them directly from your terminal.
 
-- 🔍 Respects `.gitignore` — skips ignored folders and files (like `venv/`, `node_modules/`, etc.).
-- 🧠 Merges environment variables by key:
-  - If a key appears in multiple `.env.example` files with **different values**, the result will contain all values separated by a `|`:  
-    `API_KEY=123|abc`
-  - If all values are the same, only one is written.
-- 📝 The CLI interface remains simple and unchanged.
-
-## Installation
-
-Install the required dependency for `.gitignore` parsing:
+## 📦 Installation
 
 ```bash
-pip install pathspec
+pip install git+https://github.com/w1vern/cli_tools
 ```
 
-## Usage
+## 🛠 Available Tools
+
+### 1. `env_generator`
+
+Generates a unified `.env` file by merging all `.env.example` files in the specified directory and its subdirectories.
+
+#### Usage:
 
 ```bash
-python -m env_generator --root path/to/search --output path/to/output/.env
+env_generator --root path_to_root_dir --output path_to_result_file/.env
 ```
-or
+
+- `--root` *(optional)*: Path to the root directory to search for `.env.example` files. Defaults to the current directory.
+- `--output` *(optional)*: Path to the resulting `.env` file. Defaults to `./.env`.
+
+---
+
+### 2. `one_file_generator`
+
+Combines all project files (excluding those ignored by `.gitignore`) into a single text file, with section headers indicating the source of each file.
+
+#### Usage:
+
 ```bash
-env_generator --root path/to/search --output path/to/output/.env
-
+one_file_generator --root path_to_root_dir --output path_to_result_file/.txt
 ```
 
-### Arguments:
-- `--root`: root directory to start searching from (default: current `.`)
-- `--output`: output `.env` file name (default: `.env`)
+- `--root` *(optional)*: Path to the root directory of the project. Defaults to the current directory.
+- `--output` *(optional)*: Path to the output file. Defaults to `./project_dump.txt`.
 
-### Example:
-
-```bash
-python __main__.py --root ./my_project --output ./merged.env
-```
-
-## Example Output
-
-If you have the following two `.env.example` files:
-
-`./app1/.env.example`:
-```env
-DEBUG=True
-API_KEY=abc123
-```
-
-`./app2/.env.example`:
-```env
-DEBUG=True
-API_KEY=xyz789
-```
-
-The resulting `.env` will be:
-```env
-API_KEY=abc123|xyz789
-DEBUG=True
-```
-
-## Notes
-
-- `.gitignore` parsing uses the [`pathspec`](https://pypi.org/project/pathspec/) library.
-- Only lines in the format `KEY=VALUE` are processed. Comments and empty lines are ignored.
-- Duplicate values for the same key are removed.
+---
