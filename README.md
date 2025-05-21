@@ -55,4 +55,8 @@ The following flags are shared across all CLI utilities in this collection:
 | `--off-git-mode`       | `-og`    | Disable git mode                             | Enabled by default                                                  |
 | `--without-submodules` | `-ws`    | Exclude git submodules from processing       | Include submodules by default                                       |
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ---
