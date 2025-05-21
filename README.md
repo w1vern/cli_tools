@@ -10,7 +10,7 @@ pip install git+https://github.com/w1vern/cli_tools
 
 ## 🛠 Available Tools
 
-### 1. `env_generator`
+### 1. `env-generator`
 
 Generates a unified `.env` file by merging all `.env.example` files in the specified directory and its subdirectories.
 
@@ -20,22 +20,39 @@ Generates a unified `.env` file by merging all `.env.example` files in the speci
 env-generator --root path_to_root_dir --output path_to_result_file/.env
 ```
 
-- `--root` *(optional)*: Path to the root directory to search for `.env.example` files. Defaults to the current directory.
-- `--output` *(optional)*: Path to the resulting `.env` file. Defaults to `./.env`.
-
 ---
 
-### 2. `one_file_generator`
+### 2. `one-file-generator`
 
 Combines all project files (excluding those ignored by `.gitignore`) into a single text file, with section headers indicating the source of each file.
 
 #### Usage:
 
 ```bash
-one-file-generator --root path_to_root_dir --output path_to_result_file/.txt
+one-file-generator --root path_to_root_dir --output path_to_result_file/.md
 ```
 
-- `--root` *(optional)*: Path to the root directory of the project. Defaults to the current directory.
-- `--output` *(optional)*: Path to the output file. Defaults to `./project_dump.txt`.
+---
+
+### 3. `tree-generator`
+
+Print a hierarchical tree view of the project files and directories into single file (`result.tree` by default), starting from the specified root.
+
+#### Usage:
+
+```bash
+tree-generator --root path_to_root_dir --output path_to_result_file/.tree
+```
+
+## ⚙️ Common Flags
+
+The following flags are shared across all CLI utilities in this collection:
+
+| Flag                   | Shortcut | Description                                  | Default                                                             |
+| ---------------------- | -------- | -------------------------------------------- | ------------------------------------------------------------------- |
+| `--root`               | `-r`     | Root directory to start searching or working | Current directory (`.`)                                             |
+| `--output`             | `-o`     | Output file path                             | Utility-specific default (e.g., `.env`, `result.tree`, `result.md`) |
+| `--off-git-mode`       | `-og`    | Disable git mode                             | Enabled by default                                                  |
+| `--without-submodules` | `-ws`    | Exclude git submodules from processing       | Include submodules by default                                       |
 
 ---

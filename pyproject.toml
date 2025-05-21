@@ -9,6 +9,7 @@ dependencies = []
 [project.scripts]
 env-generator = "env_generator.main:main"
 one-file-generator = "one_file_generator.main:main"
+tree-generator = "tree_generator.main:main"
 
 [build-system]
 requires = ["setuptools"]

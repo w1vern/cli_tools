@@ -1,8 +1,10 @@
 
+from pathlib import Path
+
 from utils import Args, cli_input, get_repo_files
 
 
-def generate_env_file(args: Args) -> None:
+def generate_env_file(files: list[Path], args: Args) -> None:
     files = get_repo_files(args, [".env.example"])
     env_dict: dict[str, str] = dict()
 
@@ -26,10 +28,10 @@ def generate_env_file(args: Args) -> None:
             values = env_dict[key]
             line = f"{key}={values}\n"
             out.write(line)
-    print(f"[✓] Generated {args.output_file} from .env.example files in {args.root_dir}")
-
 
 
 def main() -> None:
     args = cli_input(".env")
-    generate_env_file(args)
+    files = get_repo_files(args)
+    generate_env_file(files, args)
+    print(f"[✓] Generated {args.output_file} from .env.example files in {args.root_dir}")
