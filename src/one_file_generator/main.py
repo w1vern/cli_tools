@@ -1,7 +1,15 @@
 
+import re
 from pathlib import Path
 
 from utils import Args, cli_input, get_repo_files
+
+
+def get_safe_fence(content: str) -> str:
+    base_char = '`'
+    matches = re.findall(rf'{re.escape(base_char)}{{3,}}', content)
+    max_len = max((len(m) for m in matches), default=3)
+    return base_char * (max_len + 1)
 
 
 def one_file_generator(files: list[Path], args: Args) -> None:
@@ -11,9 +19,9 @@ def one_file_generator(files: list[Path], args: Args) -> None:
                 content = f.read().strip()
             out.write(f"from `./{file.as_posix()}`\n")
             out.write(f"{"---"}\n")
-            out.write("```\n")
+            out.write("````\n")  # TODO: use get_safe_fence
             out.write(f"{content}\n")
-            out.write("```\n")
+            out.write("````\n")
             out.write(f"{"---"}\n")
 
 
