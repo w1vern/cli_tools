@@ -17,7 +17,7 @@ Generates a unified `.env` file by merging all `.env.example` files in the speci
 #### Usage:
 
 ```bash
-env_generator --root path_to_root_dir --output path_to_result_file/.env
+env-generator --root path_to_root_dir --output path_to_result_file/.env
 ```
 
 - `--root` *(optional)*: Path to the root directory to search for `.env.example` files. Defaults to the current directory.
@@ -32,7 +32,7 @@ Combines all project files (excluding those ignored by `.gitignore`) into a sing
 #### Usage:
 
 ```bash
-one_file_generator --root path_to_root_dir --output path_to_result_file/.txt
+one-file-generator --root path_to_root_dir --output path_to_result_file/.txt
 ```
 
 - `--root` *(optional)*: Path to the root directory of the project. Defaults to the current directory.

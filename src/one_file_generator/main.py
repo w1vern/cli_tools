@@ -1,9 +1,10 @@
 
-from utils import cli_input, get_repo_files
+from utils import Args, cli_input, get_repo_files
 
-def one_file_generator(root_dir: str = ".", output_file: str = "result") -> None:
-    files = get_repo_files(root_dir)
-    with open(output_file, "w", encoding="utf-8") as out:
+
+def one_file_generator(args: Args) -> None:
+    files = get_repo_files(args)
+    with open(args.output_file, "w", encoding="utf-8") as out:
         for file in files:
             with open(file, "r", encoding="utf-8") as f:
                 content = f.read().strip()
@@ -12,11 +13,11 @@ def one_file_generator(root_dir: str = ".", output_file: str = "result") -> None
             out.write(f"{content}\n")
             out.write(f"{"-" * 100}\n")
 
-    print(f"[✓] Successfully generated '{output_file}' from {len(files)} file(s) in '{root_dir}'")
+    print(f"[✓] Successfully generated '{args.output_file}' from {len(files)} file(s) in '{args.root_dir}'")
 
 
 
 
 def main() -> None:
-    args = cli_input()
-    one_file_generator(args.root, args.output)
+    args = cli_input("result.txt")
+    one_file_generator(args)
