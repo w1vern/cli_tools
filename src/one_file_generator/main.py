@@ -2,7 +2,7 @@
 import re
 from pathlib import Path
 
-from utils import Args, cli_input, get_repo_files
+from ..utils import Args, cli_input, get_repo_files
 
 
 def get_safe_fence(content: str) -> str:
@@ -15,7 +15,7 @@ def get_safe_fence(content: str) -> str:
 def one_file_generator(files: list[Path], args: Args) -> None:
     with open(args.output_file, "w", encoding="utf-8") as out:
         for file in files:
-            with open(args.root_dir / file, "r", encoding="utf-8") as f:
+            with open(args.root_dir / file, "r", encoding="utf-8", errors="replace") as f:
                 content = f.read().strip()
             out.write(f"from `./{file.as_posix()}`\n")
             out.write(f"{"---"}\n")

@@ -18,7 +18,7 @@ def cli_input(default_output: str) -> Args:
         "--off-git-mode", "-og", action="store_false", help="Disable git mode", dest="use_git"
     )
     parser.add_argument(
-        "--without-submodules", "-ws", action="store_false", help="Do not include submodules", dest="with_submodules"
+        "--with-submodules", "-ws", action="store_true", help="Do not include submodules", dest="with_submodules"
     )
 
     return Args(parser.parse_args())

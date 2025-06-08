@@ -48,12 +48,12 @@ tree-generator --root path_to_root_dir --output path_to_result_file/.tree
 
 The following flags are shared across all CLI utilities in this collection:
 
-| Flag                   | Shortcut | Description                                  | Default                                                             |
-| ---------------------- | -------- | -------------------------------------------- | ------------------------------------------------------------------- |
-| `--root`               | `-r`     | Root directory to start searching or working | Current directory (`.`)                                             |
-| `--output`             | `-o`     | Output file path                             | Utility-specific default (e.g., `.env`, `result.tree`, `result.md`) |
-| `--off-git-mode`       | `-og`    | Disable git mode                             | Enabled by default                                                  |
-| `--without-submodules` | `-ws`    | Exclude git submodules from processing       | Include submodules by default                                       |
+| Flag                | Shortcut | Description                                  | Default                                                             |
+|---------------------|----------|----------------------------------------------|---------------------------------------------------------------------|
+| `--root`            | `-r`     | Root directory to start searching or working | Current directory (`.`)                                             |
+| `--output`          | `-o`     | Output file path                             | Utility-specific default (e.g., `.env`, `result.tree`, `result.md`) |
+| `--off-git-mode`    | `-og`    | Disable git mode                             | Enabled by default                                                  |
+| `--with-submodules` | `-ws`    | Include git submodules from processing       | Exclude submodules by default                                       |
 
 ## License
 

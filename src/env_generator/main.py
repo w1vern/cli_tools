@@ -1,7 +1,7 @@
 
 from pathlib import Path
 
-from utils import Args, cli_input, get_repo_files
+from ..utils import Args, cli_input, get_repo_files
 
 
 def generate_env_file(files: list[Path], args: Args) -> None:
@@ -15,7 +15,7 @@ def generate_env_file(files: list[Path], args: Args) -> None:
         return key.strip(), value.strip()
 
     for file in files:
-        with open(args.root_dir / file, "r", encoding="utf-8") as f:
+        with open(args.root_dir / file, "r", encoding="utf-8", errors="replace") as f:
             for line in f:
                 key, value = parse_env_line(line)
                 if key in env_dict and value not in env_dict[key].split("|"):
