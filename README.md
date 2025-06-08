@@ -8,6 +8,12 @@ A collection of handy CLI tools for everyday development tasks. Install and use 
 pip install git+https://github.com/w1vern/cli_tools
 ```
 
+## 🔄 Update
+
+```bash
+pip install --upgrade cli_tools
+```
+
 ## 🛠 Available Tools
 
 ### 1. `env-generator`
@@ -54,6 +60,7 @@ The following flags are shared across all CLI utilities in this collection:
 | `--output`          | `-o`     | Output file path                             | Utility-specific default (e.g., `.env`, `result.tree`, `result.md`) |
 | `--off-git-mode`    | `-og`    | Disable git mode                             | Enabled by default                                                  |
 | `--with-submodules` | `-ws`    | Include git submodules from processing       | Exclude submodules by default                                       |
+| `--version`         | `-v`     | Display package version                      | ...                                                                 |
 
 ## License
 

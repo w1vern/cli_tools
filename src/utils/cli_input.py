@@ -1,6 +1,7 @@
 
 
 import argparse
+from importlib.metadata import version, PackageNotFoundError
 
 from .args import Args
 
@@ -20,5 +21,14 @@ def cli_input(default_output: str) -> Args:
     parser.add_argument(
         "--with-submodules", "-ws", action="store_true", help="Do not include submodules", dest="with_submodules"
     )
+    parser.add_argument(
+        "--version", "-v", action='version', version=get_version()
+    )
 
     return Args(parser.parse_args())
+
+def get_version() -> str:
+    try:
+        return f"%(prog)s {version('cli_tools')}"
+    except PackageNotFoundError:
+        return "%(prog)s (version not found)"
