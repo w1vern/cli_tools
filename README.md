@@ -11,7 +11,7 @@ pip install git+https://github.com/w1vern/cli_tools
 ## 🔄 Update
 
 ```bash
-pip install --upgrade cli_tools
+pip install --force-reinstall --no-cache-dir git+https://github.com/w1vern/cli_tools
 ```
 
 ## 🛠 Available Tools

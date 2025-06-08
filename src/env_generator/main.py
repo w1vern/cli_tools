@@ -1,7 +1,7 @@
 
 from pathlib import Path
 
-from ..utils import Args, cli_input, get_repo_files
+from utils import Args, cli_input, get_repo_files
 
 
 def generate_env_file(files: list[Path], args: Args) -> None:

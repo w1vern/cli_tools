@@ -2,7 +2,7 @@
 import re
 from pathlib import Path
 
-from ..utils import Args, cli_input, get_repo_files
+from utils import Args, cli_input, get_repo_files
 
 
 def get_safe_fence(content: str) -> str:

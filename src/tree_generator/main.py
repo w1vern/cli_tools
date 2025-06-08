@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from typing import TextIO
 
-from ..utils import Args, cli_input, get_repo_files
+from utils import Args, cli_input, get_repo_files
 
 
 class TreeNode:
