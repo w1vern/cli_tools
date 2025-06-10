@@ -1,10 +1,10 @@
 
-from pathlib import Path
+from typing import TextIO
 
-from utils import Args, cli_input, get_repo_files
+from utils import Args, get_repo_files
 
 
-def generate_env_file(files: list[Path], args: Args) -> None:
+def env_generator(args: Args, out: TextIO) -> int:
     files = get_repo_files(args, [".env.example"])
     env_dict: dict[str, str] = dict()
 
@@ -22,16 +22,8 @@ def generate_env_file(files: list[Path], args: Args) -> None:
                     env_dict[key] += f"|{value}"
                 else:
                     env_dict[key] = value
-
-    with open(args.output_file, "w", encoding="utf-8") as out:
-        for key, value in env_dict.items():
-            values = env_dict[key]
-            line = f"{key}={values}\n"
-            out.write(line)
-
-
-def main() -> None:
-    args = cli_input(".env")
-    files = get_repo_files(args)
-    generate_env_file(files, args)
-    print(f"[✓] Generated {args.output_file} from .env.example files in {args.root_dir}")
+    for key, value in env_dict.items():
+        values = env_dict[key]
+        line = f"{key}={values}\n"
+        out.write(line)
+    return len(files)

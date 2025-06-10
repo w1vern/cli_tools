@@ -1,9 +1,8 @@
 
 import os
-from pathlib import Path
 from typing import TextIO
 
-from utils import Args, cli_input, get_repo_files
+from utils import Args, get_repo_files
 
 
 class TreeNode:
@@ -34,19 +33,11 @@ class TreeNode:
             child._write(file, "", i == child_count - 1)
 
 
-def tree_generator(files: list[Path], args: Args) -> None:
+def tree_generator(args: Args, out: TextIO) -> int:
+    files = get_repo_files(args)
     root = TreeNode(".")
     for path in files:
         parts = str(path).split(os.sep)
         root.add_path(parts)
-
-    with open(args.output_file, "w", encoding="utf-8") as f:
-        root.write_tree(f)
-
-
-def main() -> None:
-    args = cli_input("result.tree")
-    files = get_repo_files(args)
-    tree_generator(files, args)
-    print(f"[✓] Successfully generated '{args.output_file}'")
-
+    root.write_tree(out)
+    return len(files)

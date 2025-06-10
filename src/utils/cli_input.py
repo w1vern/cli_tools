@@ -1,12 +1,13 @@
 
 
 import argparse
-from importlib.metadata import version, PackageNotFoundError
+import sys
+from importlib.metadata import PackageNotFoundError, version
 
 from .args import Args
 
 
-def cli_input(default_output: str) -> Args:
+def cli_input(default_output: str, first_arg: int = 1) -> Args:
     parser = argparse.ArgumentParser(
         description="Merge all .env.example files into one .env")
     parser.add_argument(
@@ -25,7 +26,7 @@ def cli_input(default_output: str) -> Args:
         "--version", "-v", action='version', version=get_version()
     )
 
-    return Args(parser.parse_args())
+    return Args(parser.parse_args(sys.argv[first_arg:]))
 
 def get_version() -> str:
     try:

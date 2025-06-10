@@ -7,10 +7,15 @@ requires-python = ">=3.7"
 dependencies = []
 
 [project.scripts]
-env-generator = "env_generator.main:main"
-one-file-generator = "one_file_generator.main:main"
-tree-generator = "tree_generator.main:main"
+env-generator = "utils.interface:main"
+one-file-generator = "utils.interface:main"
+tree-generator = "utils.interface:main"
 
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "isort>=5.11.5",
+]
