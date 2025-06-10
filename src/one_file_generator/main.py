@@ -2,7 +2,7 @@
 import re
 from typing import TextIO
 
-from utils import Args, get_repo_files
+from utils import Args, get_files
 
 
 def get_safe_fence(content: str) -> str:
@@ -13,7 +13,7 @@ def get_safe_fence(content: str) -> str:
 
 
 def one_file_generator(args: Args, out: TextIO) -> int:
-    files = get_repo_files(args)
+    files = get_files(args)
     for file in files:
         with open(args.root_dir / file, "r", encoding="utf-8", errors="replace") as f:
             content = f.read().strip()

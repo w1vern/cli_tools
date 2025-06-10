@@ -2,7 +2,7 @@
 import os
 from typing import TextIO
 
-from utils import Args, get_repo_files
+from utils import Args, get_files
 
 
 class TreeNode:
@@ -34,7 +34,7 @@ class TreeNode:
 
 
 def tree_generator(args: Args, out: TextIO) -> int:
-    files = get_repo_files(args)
+    files = get_files(args)
     root = TreeNode(".")
     for path in files:
         parts = str(path).split(os.sep)

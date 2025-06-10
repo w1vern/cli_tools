@@ -8,10 +8,10 @@ from .args import Args
 
 
 def get_all_files(root_dir: Path) -> list[Path]:
-    result_files = []
+    result_files: list[Path] = []
     for root, dirs, files in os.walk(root_dir):
         for file in files:
-            result_files.append(file)
+            result_files.append(Path(root) / file)
     return result_files
 
 
@@ -68,12 +68,12 @@ def get_all_git_included_files(repo_path: Path,
         raise e
 
 
-def get_repo_files(args: Args, file_masks: list[str] = ["*"]) -> list[Path]:
+def get_files(args: Args, file_masks: list[str] = ["*"]) -> list[Path]:
     if args.git_mode:
         all_files = get_all_git_included_files(
-            Path(args.root_dir), args.with_submodules)
+            args.root_dir, args.with_submodules)
     else:
-        all_files = get_all_files(Path(args.root_dir))
+        all_files = get_all_files(args.root_dir)
     result_files = []
     for file in all_files:
         use_file = False

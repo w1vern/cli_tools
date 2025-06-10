@@ -30,6 +30,6 @@ def cli_input(default_output: str, first_arg: int = 1) -> Args:
 
 def get_version() -> str:
     try:
-        return f"%(prog)s {version('cli_tools')}"
+        return f"version {version('cli_tools')}"
     except PackageNotFoundError:
-        return "%(prog)s (version not found)"
+        return "version not found"

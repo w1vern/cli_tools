@@ -1,11 +1,11 @@
 
 from typing import TextIO
 
-from utils import Args, get_repo_files
+from utils import Args, get_files
 
 
 def env_generator(args: Args, out: TextIO) -> int:
-    files = get_repo_files(args, [".env.example"])
+    files = get_files(args, [".env.example"])
     env_dict: dict[str, str] = dict()
 
     def parse_env_line(line: str) -> tuple[str, str] | None:
