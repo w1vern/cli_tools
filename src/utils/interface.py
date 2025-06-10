@@ -14,7 +14,7 @@ def main(first_arg: int = 1) -> None:
         "one-file-generator": ("result.md", one_file_generator),
         "env-generator": (".env", env_generator),
     }
-    tool_name = sys.argv[first_arg - 1]
+    tool_name = sys.argv[first_arg - 1].replace("\\", "/").split("/")[-1]
     tool = tools.get(tool_name)
     if not tool:
         print(f"Unknown tool name: {tool_name}")
