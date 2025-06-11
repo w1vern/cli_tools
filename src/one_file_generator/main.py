@@ -15,9 +15,9 @@ def get_safe_fence(content: str) -> str:
 def one_file_generator(args: Args, out: TextIO) -> int:
     files = get_files(args)
     for file in files:
-        with open(args.root_dir / file, "r", encoding="utf-8", errors="replace") as f:
+        with open(file, "r", encoding="utf-8", errors="replace") as f:
             content = f.read().strip()
-        out.write(f"from `./{file.as_posix()}`\n")
+        out.write(f"from `./{file.relative_to(args.root_dir).as_posix()}`\n")
         out.write(f"{"---"}\n")
         out.write("````\n")  # TODO: use get_safe_fence
         out.write(f"{content}\n")

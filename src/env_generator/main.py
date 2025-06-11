@@ -15,7 +15,7 @@ def env_generator(args: Args, out: TextIO) -> int:
         return key.strip(), value.strip()
 
     for file in files:
-        with open(args.root_dir / file, "r", encoding="utf-8", errors="replace") as f:
+        with open(file, "r", encoding="utf-8", errors="replace") as f:
             for line in f:
                 parsed = parse_env_line(line)
                 if not parsed:

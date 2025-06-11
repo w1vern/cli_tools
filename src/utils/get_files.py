@@ -48,6 +48,7 @@ def get_all_git_included_files(repo_path: Path,
             text=True,
             check=True
         )
+
         all_files = [
             repo_path / line for line in result.stdout.strip().split('\n') if line]
 
