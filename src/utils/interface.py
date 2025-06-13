@@ -22,7 +22,7 @@ def main(first_arg: int = 1) -> None:
     default_output, generator = tool
     args = cli_input(default_output, first_arg)
 
-    out = sys.stdout if args.output_file == "*" else open(
+    out = sys.stdout if args.output_file is None else open(
         args.output_file, "w", encoding="utf-8")
 
     length = generator(args, out)
