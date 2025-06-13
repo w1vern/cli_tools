@@ -27,7 +27,7 @@ def main(first_arg: int = 1) -> None:
 
     length = generator(args, out)
 
-    if args.output_file != "*":
+    if not args.output_file is None:
         print("".join([
             f"[✓] Successfully generated '{args.output_file}' ",
             f"from {length} file(s) in '{args.root_dir}'"
