@@ -2,7 +2,9 @@
 name = "cli_tools"
 version = "0.2.4"
 description = "Set of useful custom cli tools"
+authors = [{ name = "w1vern", email = "bndvvl@gmail.com" }]
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.7"
 dependencies = []
 
