@@ -1,6 +1,6 @@
 [project]
 name = "cli_tools"
-version = "0.2.4"
+version = "0.2.5"
 description = "Set of useful custom cli tools"
 authors = [{ name = "w1vern", email = "bndvvl@gmail.com" }]
 readme = "README.md"

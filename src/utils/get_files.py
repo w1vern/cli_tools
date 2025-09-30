@@ -77,11 +77,17 @@ def get_files(args: Args, file_masks: list[str] = ["*"]) -> list[Path]:
         all_files = get_all_files(args.root_dir)
     result_files = []
     for file in all_files:
-        use_file = False
-        for mask in file_masks:
+        use_file = True
+        for mask in args.masks:
             if file.match(mask):
-                use_file = True
+                use_file = False
                 break
         if use_file:
-            result_files.append(file)
+            use_file = False
+            for mask in file_masks:
+                if file.match(mask):
+                    use_file = True
+                    break
+            if use_file:
+                result_files.append(file)
     return result_files

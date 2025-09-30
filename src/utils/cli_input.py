@@ -25,6 +25,15 @@ def cli_input(default_output: str, first_arg: int = 1) -> Args:
     parser.add_argument(
         "--version", "-v", action='version', version=get_version()
     )
+    parser.add_argument(
+        "--mask", "-m",
+        action="append",
+        nargs="+",
+        metavar="MASK",
+        help="File mask(s) to include (glob). Can be used multiple times."
+             "Prefix with @ to read masks from a file, e.g. -m @masks.txt",
+        dest="masks"
+    )
 
     return Args(parser.parse_args(sys.argv[first_arg:]))
 
