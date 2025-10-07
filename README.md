@@ -14,6 +14,12 @@ pip install git+https://github.com/w1vern/cli_tools
 pip install --force-reinstall --no-cache-dir git+https://github.com/w1vern/cli_tools
 ```
 
+for linux pipx:
+
+```bash
+pipx runpip cli_tools install --upgrade "git+https://github.com/w1vern/cli_tools.git"
+```
+
 ## 🛠 Available Tools
 
 ### 1. `env-generator`
