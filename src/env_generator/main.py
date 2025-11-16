@@ -4,8 +4,13 @@ from typing import TextIO
 from utils import Args, get_files
 
 
-def env_generator(args: Args, out: TextIO) -> int:
-    files = get_files(args, [".env.example"])
+def env_generator(
+    args: Args,
+    out: TextIO
+) -> int:
+    if len(args.masks) == 0:
+        args.masks.append("*.env.example")
+    files = get_files(args)
     env_dict: dict[str, str] = dict()
 
     def parse_env_line(line: str) -> tuple[str, str] | None:

@@ -5,14 +5,19 @@ from typing import TextIO
 from utils import Args, get_files
 
 
-def get_safe_fence(content: str) -> str:
+def get_safe_fence(
+    content: str
+) -> str:
     base_char = '`'
     matches = re.findall(rf'{re.escape(base_char)}{{3,}}', content)
     max_len = max((len(m) for m in matches), default=3)
     return base_char * (max_len + 1)
 
 
-def one_file_generator(args: Args, out: TextIO) -> int:
+def one_file_generator(
+    args: Args,
+    out: TextIO
+) -> int:
     files = get_files(args)
     for file in files:
         with open(file, "r", encoding="utf-8", errors="replace") as f:

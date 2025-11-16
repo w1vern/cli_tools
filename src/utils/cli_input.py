@@ -1,5 +1,4 @@
 
-
 import argparse
 import sys
 from importlib.metadata import PackageNotFoundError, version
@@ -7,7 +6,10 @@ from importlib.metadata import PackageNotFoundError, version
 from .args import Args
 
 
-def cli_input(default_output: str, first_arg: int = 1) -> Args:
+def cli_input(
+    default_output: str,
+    first_arg: int = 1
+) -> Args:
     parser = argparse.ArgumentParser(
         description="Merge all .env.example files into one .env")
     parser.add_argument(
@@ -30,12 +32,20 @@ def cli_input(default_output: str, first_arg: int = 1) -> Args:
         action="append",
         nargs="+",
         metavar="MASK",
-        help="File mask(s) to include (glob). Can be used multiple times."
-             "Prefix with @ to read masks from a file, e.g. -m @masks.txt",
+        help="File mask(s) to include (glob). Can be used multiple times.",
         dest="masks"
+    )
+    parser.add_argument(
+        "--anti-mask", "-am",
+        action="append",
+        nargs="+",
+        metavar="ANTI_MASK",
+        help="File mask(s) to exclude (glob). Can be used multiple times.",
+        dest="anti_masks"
     )
 
     return Args(parser.parse_args(sys.argv[first_arg:]))
+
 
 def get_version() -> str:
     try:

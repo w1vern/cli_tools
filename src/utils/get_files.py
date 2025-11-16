@@ -1,5 +1,5 @@
 
-
+import fnmatch
 import os
 import subprocess
 from pathlib import Path
@@ -7,18 +7,21 @@ from pathlib import Path
 from .args import Args
 
 
-def get_all_files(root_dir: Path) -> list[Path]:
+def get_all_files(
+        root_dir: Path
+) -> list[Path]:
     result_files: list[Path] = []
-    for root, dirs, files in os.walk(root_dir):
+    for root, _, files in os.walk(root_dir):
         for file in files:
             result_files.append(Path(root) / file)
     return result_files
 
 
-def get_all_git_included_files(repo_path: Path,
-                               with_submodules: bool,
-                               depth: int = 1
-                               ) -> list[Path]:
+def get_all_git_included_files(
+    repo_path: Path,
+    with_submodules: bool,
+    depth: int = 1
+) -> list[Path]:
     def get_submodules(repo_path: Path) -> list[Path]:
         try:
             result = subprocess.run(
@@ -69,7 +72,9 @@ def get_all_git_included_files(repo_path: Path,
         raise e
 
 
-def get_files(args: Args, file_masks: list[str] = ["*"]) -> list[Path]:
+def get_files(
+    args: Args
+) -> list[Path]:
     if args.git_mode:
         all_files = get_all_git_included_files(
             args.root_dir, args.with_submodules)
@@ -78,14 +83,14 @@ def get_files(args: Args, file_masks: list[str] = ["*"]) -> list[Path]:
     result_files = []
     for file in all_files:
         use_file = True
-        for mask in args.masks:
-            if file.match(mask):
+        for mask in args.anti_masks:
+            if fnmatch.fnmatch(file.as_posix(), mask):
                 use_file = False
                 break
         if use_file:
-            use_file = False
-            for mask in file_masks:
-                if file.match(mask):
+            use_file = len(args.masks) == 0
+            for mask in args.masks:
+                if fnmatch.fnmatch(file.as_posix(), mask):
                     use_file = True
                     break
             if use_file:

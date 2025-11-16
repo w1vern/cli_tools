@@ -1,7 +1,7 @@
 [project]
 name = "cli_tools"
-version = "0.2.6"
-description = "Set of useful custom cli tools"
+version = "0.3.0"
+description = "Set of useful cli tools"
 authors = [{ name = "w1vern", email = "bndvvl@gmail.com" }]
 readme = "README.md"
 license = "MIT"
@@ -10,14 +10,21 @@ dependencies = []
 
 [project.scripts]
 env-generator = "utils.interface:main"
+eg = "utils.interface:main"
 one-file-generator = "utils.interface:main"
+ofg = "utils.interface:main"
 tree-generator = "utils.interface:main"
+tg = "utils.interface:main"
 
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [dependency-groups]
-dev = [
-    "isort>=5.11.5",
-]
+dev = ["isort>=5.11.5"]
+
+[tool.isort]
+profile = "black"
+line_length = 70
+multi_line_output = 3
+include_trailing_comma = false
