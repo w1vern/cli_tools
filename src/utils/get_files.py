@@ -25,8 +25,16 @@ def get_all_git_included_files(
     def get_submodules(repo_path: Path) -> list[Path]:
         try:
             result = subprocess.run(
-                ['git', '-C', str(repo_path), 'config', '--file',
-                 '.gitmodules', '--get-regexp', 'path'],
+                [
+                    'git',
+                    '-C',
+                    str(repo_path),
+                    'config',
+                    '--file',
+                    '.gitmodules',
+                    '--get-regexp',
+                    'path'
+                ],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
@@ -44,8 +52,15 @@ def get_all_git_included_files(
         submodules = get_submodules(repo_path)
 
         result = subprocess.run(
-            ['git', '-C', str(repo_path), 'ls-files', '--cached',
-             '--others', '--exclude-standard'],
+            [
+                'git',
+                '-C',
+                str(repo_path),
+                'ls-files',
+                '--cached',
+                '--others',
+                '--exclude-standard'
+            ],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
@@ -57,7 +72,7 @@ def get_all_git_included_files(
 
         all_files = [
             f for f in all_files
-            if f.exists() and not any(f.resolve() == sm.resolve() for sm in submodules)
+            if f.exists() and not any(f.resolve() == sm.resolve()for sm in submodules)
         ]
 
         if with_submodules and depth > 0:
@@ -75,9 +90,32 @@ def get_all_git_included_files(
 def get_files(
     args: Args
 ) -> list[Path]:
+    print(args.git_mode)
+    if args.git_mode is None:
+        def is_git_repo(path: Path) -> bool:
+            try:
+                subprocess.run(
+                    [
+                        "git",
+                        "rev-parse",
+                        "--is-inside-work-tree"
+                    ],
+                    cwd=str(path),
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    check=True
+                )
+            except Exception:
+                return False
+            else:
+                return True
+
+        args.git_mode = is_git_repo(args.root_dir)
     if args.git_mode:
         all_files = get_all_git_included_files(
-            args.root_dir, args.with_submodules)
+            repo_path=args.root_dir,
+            with_submodules=args.with_submodules
+        )
     else:
         all_files = get_all_files(args.root_dir)
     result_files = []

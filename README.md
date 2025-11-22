@@ -64,7 +64,8 @@ The following flags are shared across all CLI utilities in this collection:
 |---------------------|----------|----------------------------------------------|-----------------------------------------------------------------------------------------------|
 | `--root`            | `-r`     | Root directory to start searching or working | Current directory (`.`)                                                                       |
 | `--output`          | `-o`     | Output file path                             | Utility-specific default (e.g., `.env`, `result.tree`, `result.md`). Use `-` to console print |
-| `--off-git-mode`    | `-og`    | Disable git mode                             | Enabled by default                                                                            |
+| `--off-git-mode`    | `-og`    | Disable git mode                             | Enabled by default if root is git repo                                                        |
+| `--git-mode`        | `-g`     | Enable git mode                              | Enabled by default if root is git repo                                                        |
 | `--with-submodules` | `-ws`    | Include git submodules from processing       | Exclude submodules by default                                                                 |
 | `--version`         | `-v`     | Display package version                      | ...                                                                                           |
 | `--mask`            | '-m'     | List of mask to include                      | [`*`]                                                                                         |

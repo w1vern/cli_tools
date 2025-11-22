@@ -11,7 +11,7 @@ class Args:
         self.root_dir: Path = Path(args.root)
         self.output_file: Path | None = Path(
             args.output) if args.output != "-" else None
-        self.git_mode: bool = bool(args.use_git)
+        self.git_mode: bool | None = bool(args.use_git) if args.use_git is not None else None
         self.with_submodules: bool = bool(args.with_submodules)
         self.masks: list[str] = [
             str(mask) for mask in args.masks[0]] if args.masks else []

@@ -11,15 +11,12 @@ def cli_input(
     first_arg: int = 1
 ) -> Args:
     parser = argparse.ArgumentParser(
-        description="Merge all .env.example files into one .env")
+        description="Set of useful cli tools")
     parser.add_argument(
         "--root", "-r", default=".", help="Root directory (default: current)", dest="root"
     )
     parser.add_argument(
         "--output", "-o", default=f"{default_output}", help="Output file name", dest="output"
-    )
-    parser.add_argument(
-        "--off-git-mode", "-og", action="store_false", help="Disable git mode", dest="use_git"
     )
     parser.add_argument(
         "--with-submodules", "-ws", action="store_true", help="Do not include submodules", dest="with_submodules"
@@ -43,6 +40,15 @@ def cli_input(
         help="File mask(s) to exclude (glob). Can be used multiple times.",
         dest="anti_masks"
     )
+
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument(
+        "--git-mode", "-g", action="store_true", help="Enable git mode", dest="use_git"
+    )
+    group.add_argument(
+        "--off-git-mode", "-og", action="store_false", help="Disable git mode", dest="use_git"
+    )
+    parser.set_defaults(use_git=None)
 
     return Args(parser.parse_args(sys.argv[first_arg:]))
 
