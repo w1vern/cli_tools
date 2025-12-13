@@ -90,7 +90,6 @@ def get_all_git_included_files(
 def get_files(
     args: Args
 ) -> list[Path]:
-    print(args.git_mode)
     if args.git_mode is None:
         def is_git_repo(path: Path) -> bool:
             try:
